@@ -1,0 +1,43 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box" >
+      <mat-card-header>
+        <mat-card-title>Add Product</mat-card-title>
+      </mat-card-header>
+      <form class="form" [formGroup]="productForm" (submit)="onSubmit()" enctype="multipart/form-data">
+        <mat-card-content>
+          <mat-form-field class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Enter the Product Name" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Price</mat-label>
+            <input type="number" step="0.01" matInput placeholder="Enter the Product Price" formControlName="price">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Brand</mat-label>
+            <mat-select formControlName="brand">
+                <mat-option *ngFor="let item of brandsData"  [value]="item.brandId">{{item.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Product Type</mat-label>
+            <mat-select formControlName="producttype" >
+                <mat-option *ngFor="let item of productTypesData"  [value]="item.productTypeId">{{item.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Product Description</mat-label>
+            <textarea matInput formControlName="description"> </textarea>
+          </mat-form-field>
+          <div>
+            <input formControlName="file" type="file" id="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+            <button mat-stroked-button color="primary" (click)="file.click()">Upload File</button>
+            <span *ngIf="fileNameUploaded.length > 0"> {{fileNameUploaded}}</span>
+          </div>
+        </mat-card-content>
+        <br>
+        <button mat-stroked-button color="primary" class="btn-block" >Submit</button>
+        
+      </form>
+    </mat-card>
+  </div>
